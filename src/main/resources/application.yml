@@ -12,3 +12,9 @@ spring:
     url: jdbc:h2:mem:testdb
     username: sa
     password:
+jwt:
+  secret-key: spring-hello-world-jwt-world-hello-security
+  access-token:
+    expire: 600000 # 10분
+  refresh-token:
+    expire: 3600000 # 1시간
