@@ -2,10 +2,12 @@ package com.example.springsecurityjwt.domain.token.service;
 
 import com.example.springsecurityjwt.domain.token.dto.TokenResponse;
 import com.example.springsecurityjwt.domain.token.entity.Token;
+import com.example.springsecurityjwt.domain.token.exception.InvalidTokenException;
 import com.example.springsecurityjwt.domain.token.jwt.JwtManager;
 import com.example.springsecurityjwt.domain.token.repository.TokenRepository;
 import com.example.springsecurityjwt.global.security.dto.AuthPrincipal;
 
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
@@ -33,6 +35,17 @@ public class TokenService {
                         )
                 );
         return new TokenResponse(accessToken, refreshToken);
+    }
+
+    @Transactional
+    public void deleteRefreshToken(Long memberId) {
+        Token token = tokenRepository.findByMemberId(memberId)
+                .orElseThrow(InvalidTokenException::new);
+        tokenRepository.delete(token);
+    }
+
+    public Claims getPayload(String token) {
+        return jwtManager.getPayload(token);
     }
 
 }

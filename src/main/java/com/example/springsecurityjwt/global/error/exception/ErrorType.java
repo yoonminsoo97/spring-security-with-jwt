@@ -4,9 +4,12 @@ import lombok.Getter;
 
 import org.springframework.http.HttpStatus;
 
+import java.util.Arrays;
+
 @Getter
 public enum ErrorType {
 
+    UN_SUPPORT_ERROR_TYPE(HttpStatus.NOT_FOUND, "E000000", "지원하지 않는 예외 유형입니다."),
     INVALID_INPUT_VALUE(HttpStatus.BAD_REQUEST, "E400001", "입력값이 잘못되었습니다."),
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "E401001", "토큰이 유효하지 않습니다."),
     EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "E401002", "토큰이 만료되었습니다."),
@@ -22,6 +25,13 @@ public enum ErrorType {
         this.httpStatus = httpStatus;
         this.errorCode = errorCode;
         this.message = message;
+    }
+
+    public static ErrorType of(String errorCode) {
+        return Arrays.stream(ErrorType.values())
+                .filter(errorType -> errorType.errorCode.equals(errorCode))
+                .findFirst()
+                .orElse(ErrorType.UN_SUPPORT_ERROR_TYPE);
     }
 
 }
