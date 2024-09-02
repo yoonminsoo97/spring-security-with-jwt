@@ -11,3 +11,4 @@
   - Spring Security 6.3.3
 - Lombok 1.18.34
 - Jakarta validation api 3.0.2
+- JJWT 0.12.6
