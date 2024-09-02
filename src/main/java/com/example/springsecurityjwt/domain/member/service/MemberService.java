@@ -1,9 +1,11 @@
 package com.example.springsecurityjwt.domain.member.service;
 
+import com.example.springsecurityjwt.domain.member.dto.MemberProfileResponse;
 import com.example.springsecurityjwt.domain.member.dto.MemberSignupRequest;
 import com.example.springsecurityjwt.domain.member.entity.Member;
 import com.example.springsecurityjwt.domain.member.exception.DuplicateNicknameException;
 import com.example.springsecurityjwt.domain.member.exception.DuplicateUsernameException;
+import com.example.springsecurityjwt.domain.member.exception.NotFoundMemberException;
 import com.example.springsecurityjwt.domain.member.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -44,6 +46,13 @@ public class MemberService {
                 .password(encoded)
                 .build();
         memberRepository.save(member);
+    }
+
+    @Transactional(readOnly = true)
+    public MemberProfileResponse memberProfile(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(NotFoundMemberException::new);
+        return new MemberProfileResponse(member);
     }
 
 }

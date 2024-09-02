@@ -14,6 +14,7 @@ public enum ErrorType {
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "E401001", "토큰이 유효하지 않습니다."),
     EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "E401002", "토큰이 만료되었습니다."),
     BAD_CREDENTIALS(HttpStatus.UNAUTHORIZED, "E401003", "아이디 또는 비밀번호가 일치하지 않습니다."),
+    NOT_FOUNT_MEMBER(HttpStatus.NOT_FOUND, "E404001", "회원을 찾을 수 없습니다."),
     DUPLICATE_NICKNAME(HttpStatus.CONFLICT, "E409001", "사용 중인 닉네임입니다."),
     DUPLICATE_USERNAME(HttpStatus.CONFLICT, "E049002", "사용 중인 아이디입니다.");
 

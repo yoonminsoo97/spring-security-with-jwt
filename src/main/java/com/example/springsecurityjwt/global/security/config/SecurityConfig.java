@@ -69,6 +69,8 @@ public class SecurityConfig {
                                 RequestURI.MEMBER_USERNAME_EXISTS.pattern()).permitAll()
                         .requestMatchers(HttpMethod.POST,
                                 RequestURI.MEMBER_SIGNUP.pattern()).permitAll()
+                        .requestMatchers(HttpMethod.GET,
+                                RequestURI.MEMBER_PROFILE.pattern()).hasRole("MEMBER")
                         .anyRequest().denyAll()
                 );
         return httpSecurity.build();

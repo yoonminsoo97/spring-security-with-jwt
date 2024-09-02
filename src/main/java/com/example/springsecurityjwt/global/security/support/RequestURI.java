@@ -14,7 +14,8 @@ public enum RequestURI {
     MEMBER_USERNAME_EXISTS(HttpMethod.GET, "/api/members/username/*", true),
     MEMBER_SIGNUP(HttpMethod.POST, "/api/members/signup", true),
     MEMBER_LOGIN(HttpMethod.POST, "/api/auth/login", true),
-    MEMBER_LOGOUT(HttpMethod.POST, "/api/auth/logout", false);
+    MEMBER_LOGOUT(HttpMethod.POST, "/api/auth/logout", false),
+    MEMBER_PROFILE(HttpMethod.GET, "/api/members/me", false);
 
     private final HttpMethod httpMethod;
     private final String pattern;
